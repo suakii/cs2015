@@ -6,7 +6,6 @@ Ball ball2;
 
 // Global gravity variable
 float gravity = 0.1;  
-Ball[] balls;
 void setup() { 
   size(800,800); 
   smooth();
