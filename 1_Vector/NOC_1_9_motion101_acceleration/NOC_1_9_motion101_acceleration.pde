@@ -1,4 +1,4 @@
-
+Mover mover;
 
 void setup() {
   size(640,360);
@@ -11,4 +11,3 @@ void draw() {
   mover.checkEdges();
   mover.display(); 
 }
-
