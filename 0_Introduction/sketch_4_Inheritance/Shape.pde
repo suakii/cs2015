@@ -1,4 +1,4 @@
-
+//GS
 class Shape {
   float x;
   float y;
