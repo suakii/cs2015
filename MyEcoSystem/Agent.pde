@@ -1,6 +1,11 @@
+/*
+ * Jonghwa Park
+ * suakii@gmail.com
+*/
 
 class Agent {
   PVector location;
+  PVector velocity;
   
   float health;
   float xoff;
@@ -9,13 +14,28 @@ class Agent {
   float r;
   float maxspeed;
   
+  //color features
+  color c;
+  int col1, col2, col3;
+  
+  //Body variables
+  PVector [] points;
+  int bodyTemplate;
+  
+  //
+  boolean simpleGraphics;
+ 
+  
   Agent(PVector l) {
-    location = l.get();
+    location = l.copy();
     health = 200;
     xoff = random(1000);
     yoff = random(1000);
     maxspeed = map(random(1), 0, 1, 15, 0);
     r = map(random(1), 0, 1, 0, 50);
+    simpleGraphics = true;
+    
+    velocity = new PVector(0, 0);
   }
   
   void run() {
@@ -24,10 +44,10 @@ class Agent {
     display();
   }
   
+  
 
   
   Agent reproduce() {
-    // asexual reproduction
     if (random(1) < 0.0005) {
       return new Agent(location);
     } 
@@ -36,12 +56,11 @@ class Agent {
     }
   }
   
-   // Method to update location
   void update() {
     // Simple movement based on perlin noise
-    float vx = map(noise(xoff),0,1,-maxspeed,maxspeed);
-    float vy = map(noise(yoff),0,1,-maxspeed,maxspeed);
-    PVector velocity = new PVector(vx,vy);
+    // How about change noise function to random function?
+    velocity.x = map(noise(xoff),0,1,-maxspeed,maxspeed);
+    velocity.y = map(noise(yoff),0,1,-maxspeed,maxspeed);
     xoff += 0.01;
     yoff += 0.01;
 
@@ -60,10 +79,28 @@ class Agent {
   
   // Method to display
   void display() {
-    ellipseMode(CENTER);
-    stroke(0,health);
-    fill(0, health);
-    ellipse(location.x, location.y, r, r);
+    
+    pushMatrix();
+      if(simpleGraphics == false)
+        drawBody();
+      else
+        simpleShape();
+    popMatrix();
+  }
+  
+  //child class to override this 
+  void drawBody() {
+  
+  }
+  void simpleShape() {
+      ellipseMode(CENTER);
+      stroke(0,health);
+      fill(0, health);
+      ellipse(location.x, location.y, r, r);
+  }
+  void changeGraphicsMode() {
+    simpleGraphics = !simpleGraphics;
+    
   }
 
   // Death

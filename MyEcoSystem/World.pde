@@ -1,4 +1,7 @@
-
+/*
+ * Jonghwa Park
+ * suakii@gmail.com
+*/
 class World {
 
   ArrayList<Agent> agents;    // An arraylist for all the creatures
@@ -36,5 +39,11 @@ class World {
       if (child != null) 
         agents.add(child);
     }
+  }
+  
+  void changeGraphicsMode() {
+    for(Agent agent: agents) {
+      agent.changeGraphicsMode();
+    }   
   }
 }

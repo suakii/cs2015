@@ -19,9 +19,13 @@ class Mover {
     
     // Compute a vector that points from location to mouse
     PVector mouse = new PVector(mouseX,mouseY);
-    PVector acceleration = PVector.sub(mouse,location);
+    PVector acceleration = PVector.sub(mouse,location);//static function
     // Set magnitude of acceleration
     acceleration.setMag(0.2);
+    
+    //
+   // acceleration.normalize();
+    //acceleration.mult(0.5);
     
     // Velocity changes according to acceleration
     velocity.add(acceleration);
@@ -39,6 +43,3 @@ class Mover {
   }
 
 }
-
-
-
