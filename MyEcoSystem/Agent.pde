@@ -14,16 +14,7 @@ class Agent {
   float r;
   float maxspeed;
   
-  //color features
-  color c;
-  int col1, col2, col3;
-  
-  //Body variables
-  PVector [] points;
-  int bodyTemplate;
-  
-  //
-  boolean simpleGraphics;
+
  
   
   Agent(PVector l) {
@@ -33,7 +24,6 @@ class Agent {
     yoff = random(1000);
     maxspeed = map(random(1), 0, 1, 15, 0);
     r = map(random(1), 0, 1, 0, 50);
-    simpleGraphics = true;
     
     velocity = new PVector(0, 0);
   }
@@ -42,18 +32,6 @@ class Agent {
     update();
     borders();
     display();
-  }
-  
-  
-
-  
-  Agent reproduce() {
-    if (random(1) < 0.0005) {
-      return new Agent(location);
-    } 
-    else {
-      return null;
-    }
   }
   
   void update() {
@@ -65,11 +43,10 @@ class Agent {
     yoff += 0.01;
 
     location.add(velocity);
-    // Death always looming
+    // Death b.b
     health -= 0.2;
   }
   
-   // Wraparound
   void borders() {
     if (location.x < -r) location.x = width+r;
     if (location.y < -r) location.y = height+r;
@@ -77,7 +54,6 @@ class Agent {
     if (location.y > height+r) location.y = -r;
   }
   
-  // Method to display
   void display() {
     
     pushMatrix();
@@ -98,10 +74,6 @@ class Agent {
       fill(0, health);
       ellipse(location.x, location.y, r, r);
   }
-  void changeGraphicsMode() {
-    simpleGraphics = !simpleGraphics;
-    
-  }
 
   // Death
   boolean dead() {
@@ -112,13 +84,4 @@ class Agent {
       return false;
     }
   }
-
-
-
-
-
-
-
-
-
 }

@@ -4,11 +4,14 @@
 */
 World world;
 
+boolean simpleGraphics;
 void setup() {
 
   size(800, 800);
+  simpleGraphics = false;
   world = new World(20);
   smooth();
+  
 
 }
 
@@ -34,6 +37,10 @@ void mouseDragged() {
 void keyPressed() {
 
   if (key == 's') {
-    world.changeGraphicsMode();
+    changeGraphicsMode();
   }
+}
+
+void changeGraphicsMode() {
+    simpleGraphics = !simpleGraphics;
 }
