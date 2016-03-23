@@ -8,6 +8,7 @@ boolean simpleGraphics;
 void setup() {
 
   size(800, 800);
+  pixelDensity(displayDensity());
   simpleGraphics = false;
   world = new World(20);
   smooth();
