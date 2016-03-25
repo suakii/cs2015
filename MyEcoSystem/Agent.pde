@@ -18,7 +18,7 @@ class Agent {
  
   
   Agent(PVector l) {
-    location = l.copy();
+    location = l;
     health = 200;
     xoff = random(1000);
     yoff = random(1000);
