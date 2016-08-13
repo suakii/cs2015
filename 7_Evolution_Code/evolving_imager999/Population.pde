@@ -23,24 +23,30 @@ class Population {
   void display(int newDNA) {
     //create keyframe
     if(newDNA%rootpopmax == 0) {
-      c_canvas.beginDraw();
-      c_canvas.background(255);
+      c_canvas1.beginDraw();
+      c_canvas1.background(255);
       for(int i = 0; i < newDNA; i++){
-        population[i].c_display();
+        population[i].display(c_canvas1);
       }
+      c_canvas1.endDraw();
+      
+      c_canvas2 = createGraphics(target.width, target.height);
+      c_canvas2.beginDraw();
+      c_canvas2.smooth();
+      c_canvas2.noStroke();
       for(int i = newDNA + rootpopmax; i < popmax; i++){
-        population[i].c_display();
+        population[i].display(c_canvas2);
       }
-      c_canvas.endDraw();
+      c_canvas2.endDraw();
       
     } else {
       //canvas = c_canvas;
       canvas.beginDraw();
-      canvas.image(c_canvas,0,0);
+      canvas.image(c_canvas1,0,0);
       for (int i = newDNA - newDNA%rootpopmax; i < newDNA - newDNA%rootpopmax + rootpopmax; i++) {
-        population[i].display();
+        population[i].display(canvas);
       }
-      
+      canvas.image(c_canvas2,0,0);
       canvas.endDraw();
       
     }

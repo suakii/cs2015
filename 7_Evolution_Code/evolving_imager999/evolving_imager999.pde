@@ -1,9 +1,12 @@
+//data of times and fitness
+Table table = new Table();
+
 // Genetic Algorithm, 
 PFont f;
 PImage target;
 
 PGraphics canvas; // GA drawing
-PGraphics c_canvas; //Ga drawing cache
+PGraphics c_canvas1, c_canvas2; //Ga drawing cache
 
 int rootpopmax;
 int popmax;
@@ -23,22 +26,34 @@ void setup() {
   f = createFont("Courier", 32, true);
   target = loadImage("monalisa.jpg");
 
-  canvas = createGraphics(128, 128);
+  surface.setSize(target.width, target.height * 2 + 70);
+  
+  table.addColumn("Gen");
+  table.addColumn("Time");
+  table.addColumn("Fitness");
+  
+  canvas = createGraphics(target.width, target.height);
   canvas.beginDraw();
   canvas.smooth();
   canvas.noStroke();
   canvas.background(255);
   canvas.endDraw();
   
-  c_canvas = createGraphics(128, 128);
-  c_canvas.beginDraw();
-  c_canvas.smooth();
-  c_canvas.noStroke();
-  c_canvas.background(255);
-  c_canvas.endDraw();
+  c_canvas1 = createGraphics(target.width, target.height);
+  c_canvas1.beginDraw();
+  c_canvas1.smooth();
+  c_canvas1.noStroke();
+  c_canvas1.background(255);
+  c_canvas1.endDraw();
 
-  //target = loadImage("gshs.jpg");
-  rootpopmax = 34;
+  c_canvas2 = createGraphics(target.width, target.height);
+  c_canvas2.beginDraw();
+  c_canvas2.smooth();
+  c_canvas2.noStroke();
+  c_canvas2.endDraw();
+  
+  //rootpopmax = (target.width + target.height) / 10;
+  rootpopmax = 33;
   popmax = rootpopmax * rootpopmax;
   
   dnaSize = 8;
@@ -50,12 +65,16 @@ void setup() {
   population = new Population(popmax, dnaSize);
 
   lastFitness = population.calFitness();
+  
   fitness = lastFitness;
 }
 
 int gen, fitness;
 
+
+
 void draw() {
+  if(fitness < 230000) exit();
   for (int i = 0; i < population.population.length; i++) {
     
     population.population[i].mutate2();
@@ -65,7 +84,7 @@ void draw() {
     fitness = population.calFitness();
 
     //if before draw is better, rollback
-    if (fitness < lastFitness || random(100)<5) {
+    if (fitness < lastFitness || random(100) < 2) {
       population.copyFromOrigToBack();
       lastFitness = fitness;
     } else {
@@ -74,12 +93,17 @@ void draw() {
     
   }
 
-
   gen++;
 
-
+  image(target, 0, 0);
   image(canvas, 0, target.height);
   displayInfo();
+  
+  
+  TableRow newRow = table.addRow();
+  newRow.setInt("Gen", gen);
+  newRow.setInt("Time", millis());
+  newRow.setInt("Fitness", fitness);
 }
 
 void displayInfo() {
@@ -97,4 +121,5 @@ void displayInfo() {
 void exit(){
   println("saving canvas..");
   canvas.save("data/result.png");
+  saveTable(table, "data/data.csv");
 }
