@@ -4,7 +4,7 @@
 class Population {
 
   float mutationRate;           // Mutation rate
-  DNA[] population;             // Array to hold the current population
+  DNA[] population;            // Array to hold the current population
   DNA[] populationBack;         // Backup population
   int dnaSize;
   

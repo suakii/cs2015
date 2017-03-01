@@ -24,7 +24,7 @@ void setup() {
   smooth();
 
   f = createFont("Courier", 32, true);
-  target = loadImage("monalisa.jpg");
+  target = loadImage("lenna128.png");
 
   surface.setSize(target.width, target.height * 2 + 70);
   
@@ -53,7 +53,7 @@ void setup() {
   c_canvas2.endDraw();
   
   //rootpopmax = (target.width + target.height) / 10;
-  rootpopmax = 33;
+  rootpopmax = 32;
   popmax = rootpopmax * rootpopmax;
   
   dnaSize = 8;
@@ -74,6 +74,8 @@ int gen, fitness;
 
 
 void draw() {
+  saveFrame("frames/#####.png");
+
   if(fitness < 230000) exit();
   for (int i = 0; i < population.population.length; i++) {
     
@@ -84,7 +86,7 @@ void draw() {
     fitness = population.calFitness();
 
     //if before draw is better, rollback
-    if (fitness < lastFitness || random(100) < 2) {
+    if (fitness < lastFitness || (fitness > 1000000 && random(40) < 2) || (fitness > 700000 && random(50) < 2) || (fitness > 400000 && random(500) < 2) ) {
       population.copyFromOrigToBack();
       lastFitness = fitness;
     } else {
@@ -121,5 +123,7 @@ void displayInfo() {
 void exit(){
   println("saving canvas..");
   canvas.save("data/result.png");
+  println("saving dna");
+  
   saveTable(table, "data/data.csv");
 }
