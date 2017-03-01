@@ -32,15 +32,15 @@ class DNA {
 
 
   void mutate2() {
-    genes[0]=constrain(genes[0]*random(0.9, 1.1), 1, target.width);
-    genes[1]=constrain(genes[1]*random(0.9, 1.1), 1, target.height);
+    genes[0]=constrain(genes[0]*(randomGaussian()/40+1), 1, target.width);
+    genes[1]=constrain(genes[1]*(randomGaussian()/40+1), 1, target.height);
 
-    genes[2]=constrain(genes[2]*random(0.9, 1.1), 1, target.width);
-    genes[3]=constrain(genes[3]*random(0.9, 1.1), 1, target.height);
+    genes[2]=constrain(genes[2]*(randomGaussian()/40+1), 1, target.width);
+    genes[3]=constrain(genes[3]*(randomGaussian()/40+1), 1, target.height);
 
-    genes[4]=constrain(genes[4]*random(0.8, 1.2), 1, 255);
-    genes[5]=constrain(genes[5]*random(0.8, 1.2), 1, 255);
-    genes[6]=constrain(genes[6]*random(0.8, 1.2), 1, 255);
+    genes[4]=constrain(genes[4]*(randomGaussian()/30+1), 1, 255);
+    genes[5]=constrain(genes[5]*(randomGaussian()/30+1), 1, 255);
+    genes[6]=constrain(genes[6]*(randomGaussian()/30+1), 1, 255);
   }
 
   void display(PGraphics cacheboard) {
