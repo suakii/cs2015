@@ -46,9 +46,24 @@ class Population {
 
     this.target = target;
 
-  void display(int newDNA) {
-    //create keyframe
-    if(newDNA%rootpopmax == 0) {
+    backgroundColor = selectBackgroundColor(target);
+
+    canvas = createGraphics(target.width, target.height);
+    canvas.beginDraw();
+    canvas.background(backgroundColor);
+    canvas.endDraw();
+    c_canvas1 = createGraphics(target.width, target.height);
+
+    fitrgb = calFitness();
+    lastFitness = fitrgb[0] + fitrgb[1] + fitrgb[2];
+    lastFitrgb = fitrgb;
+
+    fitness = lastFitness;
+  }
+
+  void display(int start, int target) {
+    //canvas = c_canvas;
+    if (target == start) {
       c_canvas1.beginDraw();
       c_canvas1.background(backgroundColor);
       for (int i = 0; i < start; i++)

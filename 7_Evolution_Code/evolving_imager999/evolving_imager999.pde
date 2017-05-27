@@ -1,3 +1,4 @@
+// evolving_imager999 version 1.2.0 build 15
 // Population version 1.2.0 build 11
 // DNA version 1.2.0 build 11
 
@@ -29,6 +30,7 @@ void setup() {
 
   f = createFont("Courier", 20, true);
 
+  surface.setTitle("evolving_imager999 v1.2.0");
 
   table.addColumn("Gen");
   table.addColumn("Time");
@@ -40,6 +42,7 @@ void setup() {
 
   // Create a populationation with a target , mutation rate, and populationation max
   PImage target;
+  target = loadImage("lenna256.png");
   population = new Population(popmax, dnaSize, target);
 }
 
